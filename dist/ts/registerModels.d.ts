@@ -1,6 +1,5 @@
-/// <reference types="mongoose" />
-import type { Database } from '@stop-n-swop/toolkit';
-export declare const registerModels: (db: Database) => {
+import { Connection } from 'mongoose';
+export declare const registerModels: (db: Connection) => {
     ssoModel: import("mongoose").Model<import("./auth").SsoRecord, any, any>;
     cmdModel: import("mongoose").Model<import("./cmd").CmdRecord, any, any>;
     companyModel: import("mongoose").Model<import("@stop-n-swop/contracts").Company, any, any>;

@@ -1,4 +1,4 @@
-import type { Database } from '@stop-n-swop/toolkit';
+import { Connection } from 'mongoose';
 import { ssoSchema } from './auth';
 import { cmdSchema } from './cmd';
 import { companySchema } from './companies';
@@ -9,7 +9,7 @@ import { productSchema } from './products';
 import { roloSchema } from './rolo';
 import { userSchema } from './users';
 
-export const registerModels = (db: Database) => {
+export const registerModels = (db: Connection) => {
   const ssoModel = db.model('Sso', ssoSchema);
   const cmdModel = db.model('Cmd', cmdSchema);
   const companyModel = db.model('Company', companySchema);
