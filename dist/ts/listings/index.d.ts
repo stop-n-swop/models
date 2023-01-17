@@ -1,5 +1,5 @@
 import { Stats, Status } from '@stop-n-swop/contracts';
-import { type Model, Schema } from 'mongoose';
+import { type Model, Schema, type Document } from 'mongoose';
 import type { OrderRecord } from '../orders';
 export interface ListingRecord {
     id: string;
