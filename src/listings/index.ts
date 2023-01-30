@@ -1,4 +1,4 @@
-import { Stats, Status } from '@stop-n-swop/contracts';
+import { Stats, Status, VerifyStatus } from '@stop-n-swop/contracts';
 import { type Model, Schema, type Document } from 'mongoose';
 import type { OrderRecord } from '../orders';
 
@@ -22,6 +22,7 @@ export interface ListingRecord {
     username: string;
     status: Status;
   }>;
+  verified: VerifyStatus;
   // virtuals
   orders: Array<OrderRecord & Document>;
 }
@@ -68,6 +69,7 @@ const listingSchema = new Schema<ListingRecord>(
     history: [historySchema],
     discount: discountSchema,
     postedAt: Date,
+    verified: String,
   },
   { timestamps: true },
 );

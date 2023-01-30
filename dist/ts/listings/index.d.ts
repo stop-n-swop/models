@@ -1,4 +1,4 @@
-import { Stats, Status } from '@stop-n-swop/contracts';
+import { Stats, Status, VerifyStatus } from '@stop-n-swop/contracts';
 import { type Model, Schema, type Document } from 'mongoose';
 import type { OrderRecord } from '../orders';
 export interface ListingRecord {
@@ -24,6 +24,7 @@ export interface ListingRecord {
         username: string;
         status: Status;
     }>;
+    verified: VerifyStatus;
     orders: Array<OrderRecord & Document>;
 }
 export type ListingModel = Model<ListingRecord>;

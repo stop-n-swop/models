@@ -63,7 +63,8 @@ const listingSchema = new Schema({
   status: String,
   history: [historySchema$1],
   discount: discountSchema,
-  postedAt: Date
+  postedAt: Date,
+  verified: String
 }, {
   timestamps: true
 });
