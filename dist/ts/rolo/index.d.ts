@@ -1,4 +1,4 @@
-import type { Condition, Region } from '@stop-n-swop/contracts';
+import type { Region } from '@stop-n-swop/contracts';
 import { type Model, Schema, type Document } from 'mongoose';
 import type { ProductDoc } from '../products';
 export interface RoloRecord {
@@ -7,7 +7,9 @@ export interface RoloRecord {
     productId: string;
     listingId: string;
     userId: string;
-    condition: Condition;
+    boxed: boolean;
+    instructions: boolean;
+    new: boolean;
     region: Region;
     views: number;
     createdAt: Date;

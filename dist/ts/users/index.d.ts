@@ -1,4 +1,4 @@
-import type { OauthProvider, Address, UserLevel, Condition, Region } from '@stop-n-swop/contracts';
+import type { OauthProvider, Address, UserLevel, Region } from '@stop-n-swop/contracts';
 import { type Model, Schema, type Document } from 'mongoose';
 import type { MerchantDoc } from '../merchants';
 interface UserFields {
@@ -18,7 +18,7 @@ interface UserFields {
         noticeEmails: boolean;
         useBalance: boolean;
         region: Region;
-        condition: Condition;
+        new: boolean;
         boxed: boolean;
         instructions: boolean;
         includeProtection: boolean;

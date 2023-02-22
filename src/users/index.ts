@@ -2,7 +2,6 @@ import type {
   OauthProvider,
   Address,
   UserLevel,
-  Condition,
   Region,
 } from '@stop-n-swop/contracts';
 import { type Model, Schema, type Document } from 'mongoose';
@@ -25,7 +24,7 @@ interface UserFields {
     noticeEmails: boolean;
     useBalance: boolean;
     region: Region;
-    condition: Condition;
+    new: boolean;
     boxed: boolean;
     instructions: boolean;
     includeProtection: boolean;
@@ -85,9 +84,9 @@ const userSchema = new Schema<UserRecord>(
       noticeEmails: Boolean,
       useBalance: Boolean,
       region: String,
-      condition: String,
       boxed: Boolean,
       instructions: Boolean,
+      new: Boolean,
       includeProtection: Boolean,
     }),
   },

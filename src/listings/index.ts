@@ -56,10 +56,10 @@ const listingSchema = new Schema<ListingRecord>(
     postage: Number,
     currency: String,
     stats: {
-      condition: String,
       region: String,
       boxed: Boolean,
       instructions: Boolean,
+      new: Boolean,
     },
     description: String,
     createdDate: Date,

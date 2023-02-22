@@ -9,7 +9,7 @@ specifiers:
   '@babel/preset-typescript': ^7.13.0
   '@commitlint/cli': ^16.0.1
   '@commitlint/config-conventional': ^16.0.0
-  '@stop-n-swop/contracts': https://github.com/stop-n-swop/stop-n-swop-contracts.git#v4.0.0
+  '@stop-n-swop/contracts': https://github.com/stop-n-swop/stop-n-swop-contracts.git#v5.0.0
   '@types/jest': ^27.4.0
   '@types/node': ^18.11.9
   '@typescript-eslint/eslint-plugin': ^4.21.0
@@ -57,7 +57,7 @@ devDependencies:
   '@babel/preset-typescript': 7.18.6_@babel+core@7.20.12
   '@commitlint/cli': 16.3.0
   '@commitlint/config-conventional': 16.2.4
-  '@stop-n-swop/contracts': github.com/stop-n-swop/stop-n-swop-contracts/e288b0c2e8a486127068c8ab5173ae031964f03e
+  '@stop-n-swop/contracts': github.com/stop-n-swop/stop-n-swop-contracts/d432fa2a3765bc5b63745506c01787b563db981a
   '@types/jest': 27.5.2
   '@types/node': 18.11.18
   '@typescript-eslint/eslint-plugin': 4.33.0_thyv6urrmcfyirt6hwk42bhgva
@@ -4638,7 +4638,7 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
     dependencies:
-      minimist: 1.2.7
+      minimist: registry.npmjs.org/minimist/1.2.7
       neo-async: 2.6.2
       source-map: 0.6.1
       wordwrap: 1.0.0
@@ -8517,10 +8517,10 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  github.com/stop-n-swop/stop-n-swop-contracts/e288b0c2e8a486127068c8ab5173ae031964f03e:
-    resolution: {tarball: https://codeload.github.com/stop-n-swop/stop-n-swop-contracts/tar.gz/e288b0c2e8a486127068c8ab5173ae031964f03e}
+  github.com/stop-n-swop/stop-n-swop-contracts/d432fa2a3765bc5b63745506c01787b563db981a:
+    resolution: {tarball: https://codeload.github.com/stop-n-swop/stop-n-swop-contracts/tar.gz/d432fa2a3765bc5b63745506c01787b563db981a}
     name: '@stop-n-swop/contracts'
-    version: 4.0.0
+    version: 5.0.0
     dev: true
 
   registry.npmjs.org/@colors/colors/1.5.0:
@@ -8546,7 +8546,6 @@ packages:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.10.tgz}
     name: graceful-fs
     version: 4.2.10
-    requiresBuild: true
     dev: true
     optional: true
 
@@ -8554,9 +8553,7 @@ packages:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/minimist/-/minimist-1.2.7.tgz}
     name: minimist
     version: 1.2.7
-    requiresBuild: true
     dev: true
-    optional: true
 
   registry.npmjs.org/saslprep/1.0.3:
     resolution: {integrity: sha512-/MY/PEMbk2SuY5sScONwhUDsV2p77Znkb/q3nSVstq/yQzYJOH/Azh29p9oJLsl3LnQwSvZDKagDGBsBwSooag==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/saslprep/-/saslprep-1.0.3.tgz}
@@ -8574,7 +8571,6 @@ packages:
     name: source-map
     version: 0.6.1
     engines: {node: '>=0.10.0'}
-    requiresBuild: true
     dev: true
     optional: true
 

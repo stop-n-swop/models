@@ -51,10 +51,10 @@ const listingSchema = new Schema({
   postage: Number,
   currency: String,
   stats: {
-    condition: String,
     region: String,
     boxed: Boolean,
-    instructions: Boolean
+    instructions: Boolean,
+    new: Boolean
   },
   description: String,
   createdDate: Date,
@@ -168,9 +168,12 @@ const productSchema = new Schema({
   rawgId: Number,
   developerId: String,
   publisherId: String,
-  spotPrice: Number,
-  highPrice: Number,
-  lowPrice: Number
+  price: {
+    spot: Number,
+    mint: Number,
+    cib: Number,
+    loose: Number
+  }
 });
 productSchema.virtual('platform', {
   ref: 'product',
@@ -203,7 +206,9 @@ const roloSchema = new Schema({
   productId: String,
   listingId: String,
   userId: String,
-  condition: String,
+  boxed: Boolean,
+  instructions: Boolean,
+  new: Boolean,
   region: String,
   views: Number
 }, {
@@ -276,9 +281,9 @@ const userSchema = new Schema({
     noticeEmails: Boolean,
     useBalance: Boolean,
     region: String,
-    condition: String,
     boxed: Boolean,
     instructions: Boolean,
+    new: Boolean,
     includeProtection: Boolean
   })
 }, {
