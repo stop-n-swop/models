@@ -9,9 +9,12 @@ export interface ProductRecord {
   cover: string;
   banner: string;
   releaseDate: Date;
-  spotPrice: number;
-  highPrice: number;
-  lowPrice: number;
+  price: {
+    spot: number;
+    mint: number;
+    cib: number;
+    loose: number;
+  };
   rawgId: number;
   gameId: string;
   platformId: string;
@@ -42,9 +45,12 @@ const productSchema = new Schema<ProductRecord>({
   rawgId: Number,
   developerId: String,
   publisherId: String,
-  spotPrice: Number,
-  highPrice: Number,
-  lowPrice: Number,
+  price: {
+    spot: Number,
+    mint: Number,
+    cib: Number,
+    loose: Number,
+  },
 });
 productSchema.virtual('platform', {
   ref: 'product',
