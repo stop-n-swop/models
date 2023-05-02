@@ -1,4 +1,5 @@
 import { Schema } from 'mongoose';
+import { nanoid } from 'nanoid';
 
 const ssoSchema = new Schema({
   id: String,
@@ -108,6 +109,72 @@ merchantSchema.virtual('user', {
   foreignField: 'userId',
   justOne: true
 });
+const createMerchant = async _ref => {
+  let {
+    Merchant,
+    User,
+    userId
+  } = _ref;
+  const id = nanoid();
+  const user = await User.findOne({
+    userId
+  });
+  const merchant = await Merchant.create({
+    balance: 0,
+    outgoingBalance: 0,
+    currency: 'GBP',
+    id,
+    onboarded: false,
+    transactions: [],
+    userId,
+    account: {},
+    payouts: []
+  });
+  user.merchantId = id;
+  await user.save();
+  return merchant;
+};
+const adjustMerchantBalance = async _ref2 => {
+  let {
+    Merchant,
+    User,
+    amount,
+    currency,
+    fee,
+    type,
+    userId,
+    listingId,
+    orderId
+  } = _ref2;
+  let merchant = await Merchant.findOne({
+    userId
+  });
+  if (merchant == null) {
+    merchant = await createMerchant({
+      Merchant,
+      User,
+      userId
+    });
+  }
+  const {
+    balance
+  } = merchant;
+  const adjusted = balance + amount;
+  const txn = {
+    id: nanoid(10),
+    amount,
+    currency,
+    fee,
+    listingId,
+    orderId,
+    type
+  };
+  merchant.transactions.push(txn);
+  console.debug(`${userId}: Updating account balance from ${balance} to ${adjusted}`);
+  merchant.balance = adjusted;
+  await merchant.save();
+  return merchant.transactions[merchant.transactions.length - 1];
+};
 
 const historySchema = new Schema({
   userId: String,
@@ -120,7 +187,6 @@ const orderSchema = new Schema({
   id: String,
   listingId: String,
   userId: String,
-  paymentId: String,
   status: String,
   errorCode: String,
   deliveryAddress: new Schema({
@@ -132,12 +198,9 @@ const orderSchema = new Schema({
     country: String
   }),
   history: [historySchema],
-  providerFee: Number,
   postedAt: Date,
   trackingProvider: String,
-  trackingNumber: String,
-  useBalance: Boolean,
-  balanceUsed: Number
+  trackingNumber: String
 }, {
   timestamps: true
 });
@@ -279,7 +342,6 @@ const userSchema = new Schema({
   preferences: new Schema({
     manualApproval: Boolean,
     noticeEmails: Boolean,
-    useBalance: Boolean,
     region: String,
     boxed: Boolean,
     instructions: Boolean,
@@ -337,4 +399,4 @@ const registerModels = db => {
   };
 };
 
-export { cmdSchema, companySchema, listingSchema, merchantSchema, orderSchema, productSchema, registerModels, roloSchema, ssoSchema, userSchema };
+export { adjustMerchantBalance, cmdSchema, companySchema, createMerchant, listingSchema, merchantSchema, orderSchema, productSchema, registerModels, roloSchema, ssoSchema, userSchema };

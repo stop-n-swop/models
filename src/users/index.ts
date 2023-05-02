@@ -22,7 +22,6 @@ interface UserFields {
   preferences: {
     manualApproval: boolean;
     noticeEmails: boolean;
-    useBalance: boolean;
     region: Region;
     new: boolean;
     boxed: boolean;
@@ -82,7 +81,6 @@ const userSchema = new Schema<UserRecord>(
     preferences: new Schema({
       manualApproval: Boolean,
       noticeEmails: Boolean,
-      useBalance: Boolean,
       region: String,
       boxed: Boolean,
       instructions: Boolean,

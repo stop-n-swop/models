@@ -6,18 +6,14 @@ export interface OrderRecord {
   id: string;
   listingId: string;
   userId: string;
-  paymentId: string;
   status: Status;
   errorCode: string;
   createdAt: Date;
   updatedAt: Date;
   postedAt: Date;
-  useBalance: boolean;
-  balanceUsed: number;
   trackingProvider: string;
   trackingNumber: string;
   deliveryAddress: Address & { name: string };
-  providerFee: number;
   history: Array<{
     createdAt: Date;
     userId: string;
@@ -44,7 +40,6 @@ const orderSchema = new Schema<OrderRecord>(
     id: String,
     listingId: String,
     userId: String,
-    paymentId: String,
     status: String,
     errorCode: String,
     deliveryAddress: new Schema({
@@ -56,12 +51,9 @@ const orderSchema = new Schema<OrderRecord>(
       country: String,
     }),
     history: [historySchema],
-    providerFee: Number,
     postedAt: Date,
     trackingProvider: String,
     trackingNumber: String,
-    useBalance: Boolean,
-    balanceUsed: Number,
   },
   { timestamps: true },
 );

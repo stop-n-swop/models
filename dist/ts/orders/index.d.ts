@@ -5,20 +5,16 @@ export interface OrderRecord {
     id: string;
     listingId: string;
     userId: string;
-    paymentId: string;
     status: Status;
     errorCode: string;
     createdAt: Date;
     updatedAt: Date;
     postedAt: Date;
-    useBalance: boolean;
-    balanceUsed: number;
     trackingProvider: string;
     trackingNumber: string;
     deliveryAddress: Address & {
         name: string;
     };
-    providerFee: number;
     history: Array<{
         createdAt: Date;
         userId: string;

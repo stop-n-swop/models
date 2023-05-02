@@ -3,6 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var mongoose = require('mongoose');
+var nanoid = require('nanoid');
 
 const ssoSchema = new mongoose.Schema({
   id: String,
@@ -112,6 +113,72 @@ merchantSchema.virtual('user', {
   foreignField: 'userId',
   justOne: true
 });
+const createMerchant = async _ref => {
+  let {
+    Merchant,
+    User,
+    userId
+  } = _ref;
+  const id = nanoid.nanoid();
+  const user = await User.findOne({
+    userId
+  });
+  const merchant = await Merchant.create({
+    balance: 0,
+    outgoingBalance: 0,
+    currency: 'GBP',
+    id,
+    onboarded: false,
+    transactions: [],
+    userId,
+    account: {},
+    payouts: []
+  });
+  user.merchantId = id;
+  await user.save();
+  return merchant;
+};
+const adjustMerchantBalance = async _ref2 => {
+  let {
+    Merchant,
+    User,
+    amount,
+    currency,
+    fee,
+    type,
+    userId,
+    listingId,
+    orderId
+  } = _ref2;
+  let merchant = await Merchant.findOne({
+    userId
+  });
+  if (merchant == null) {
+    merchant = await createMerchant({
+      Merchant,
+      User,
+      userId
+    });
+  }
+  const {
+    balance
+  } = merchant;
+  const adjusted = balance + amount;
+  const txn = {
+    id: nanoid.nanoid(10),
+    amount,
+    currency,
+    fee,
+    listingId,
+    orderId,
+    type
+  };
+  merchant.transactions.push(txn);
+  console.debug(`${userId}: Updating account balance from ${balance} to ${adjusted}`);
+  merchant.balance = adjusted;
+  await merchant.save();
+  return merchant.transactions[merchant.transactions.length - 1];
+};
 
 const historySchema = new mongoose.Schema({
   userId: String,
@@ -124,7 +191,6 @@ const orderSchema = new mongoose.Schema({
   id: String,
   listingId: String,
   userId: String,
-  paymentId: String,
   status: String,
   errorCode: String,
   deliveryAddress: new mongoose.Schema({
@@ -136,12 +202,9 @@ const orderSchema = new mongoose.Schema({
     country: String
   }),
   history: [historySchema],
-  providerFee: Number,
   postedAt: Date,
   trackingProvider: String,
-  trackingNumber: String,
-  useBalance: Boolean,
-  balanceUsed: Number
+  trackingNumber: String
 }, {
   timestamps: true
 });
@@ -283,7 +346,6 @@ const userSchema = new mongoose.Schema({
   preferences: new mongoose.Schema({
     manualApproval: Boolean,
     noticeEmails: Boolean,
-    useBalance: Boolean,
     region: String,
     boxed: Boolean,
     instructions: Boolean,
@@ -341,8 +403,10 @@ const registerModels = db => {
   };
 };
 
+exports.adjustMerchantBalance = adjustMerchantBalance;
 exports.cmdSchema = cmdSchema;
 exports.companySchema = companySchema;
+exports.createMerchant = createMerchant;
 exports.listingSchema = listingSchema;
 exports.merchantSchema = merchantSchema;
 exports.orderSchema = orderSchema;

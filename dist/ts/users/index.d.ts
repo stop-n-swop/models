@@ -16,7 +16,6 @@ interface UserFields {
     preferences: {
         manualApproval: boolean;
         noticeEmails: boolean;
-        useBalance: boolean;
         region: Region;
         new: boolean;
         boxed: boolean;
