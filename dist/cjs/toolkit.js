@@ -228,6 +228,7 @@ const productSchema = new mongoose.Schema({
   platformIds: [String],
   type: String,
   name: String,
+  shortName: String,
   alias: [String],
   cover: String,
   banner: String,
