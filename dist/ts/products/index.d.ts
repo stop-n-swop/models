@@ -5,6 +5,7 @@ export interface ProductRecord {
     type: ProductType;
     id: string;
     name: string;
+    shortName: string;
     cover: string;
     banner: string;
     releaseDate: Date;

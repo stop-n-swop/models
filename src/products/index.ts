@@ -6,6 +6,7 @@ export interface ProductRecord {
   type: ProductType;
   id: string;
   name: string;
+  shortName: string;
   cover: string;
   banner: string;
   releaseDate: Date;
@@ -38,6 +39,7 @@ const productSchema = new Schema<ProductRecord>({
   platformIds: [String],
   type: String,
   name: String,
+  shortName: String,
   alias: [String],
   cover: String,
   banner: String,
